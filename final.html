@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video</title>
+<style>
+  video {
+    width: 100%;
+    position: absolute; top: 0; left: 0;
+  }
+</style>
+</head>
+<body>
+  <video id='v' poster='poster.png' src="sample.m4v"></video>
+  <script>
+var v = document.getElementById('v');
+v.addEventListener("click", react);
+
+function react() {
+  if (v.paused) {
+    if (v.webkitRequestFullscreen) {
+      v.webkitRequestFullscreen();
+    } else if (v.mozRequestFullScreen) {
+      v.mozRequestFullScreen();
+    }
+    v.play();
+  } else {
+    if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else {
+      document.webkitCancelFullScreen();
+    }
+    v.pause();
+  }
+}
+
+document.addEventListener("visibilitychange", visible);
+function visible() {
+  if (document.hidden && !v.paused) {
+    v.pause();
+  }
+}
+
+  </script>
+
+</body>
+</html>
